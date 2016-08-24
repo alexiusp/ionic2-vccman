@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
+import './rxjs-operators';
 import { ResponseWrapper } from '../models/response';
+import { AppConfig } from '../config';
 
 export enum RequestType {GET,POST}
 
@@ -9,7 +11,8 @@ export enum RequestType {GET,POST}
 export class RequestService {
 
   constructor (
-		private http: Http
+		private http : Http,
+    private config : AppConfig
   ) {}
   private _cookies;
   private handleError (error: Response) {
@@ -17,7 +20,7 @@ export class RequestService {
     return Observable.throw(error.json().message || 'Server error');
   }
   request(type : RequestType, url : string, data? : any) {
-    let _url = '/' + url + '?os=unknown&v=3.00';
+    let _url = this.config.getUrl() + '/' + url + '?os=unknown&v=' + this.config.getVer();
     let reqObserable : Observable<Response>;
     switch(type) {
       case RequestType.POST:

@@ -3,6 +3,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import {Platform, MenuController, ionicBootstrap} from 'ionic-angular';
 import { AccountService } from './pages/start/account.service';
 import { RequestService } from './services/request.service';
+import { AppConfig } from './config';
 
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
@@ -15,7 +16,8 @@ enableProdMode();
     //ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     AccountService,
-    RequestService
+    RequestService,
+    AppConfig
   ]
 })
 export class MyApp {
